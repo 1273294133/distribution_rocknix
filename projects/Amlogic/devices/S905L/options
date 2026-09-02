@@ -1,0 +1,34 @@
+################################################################################
+# setup device defaults - Amlogic S905L (GXL) 1G slowemmc TV box
+################################################################################
+
+  # The TARGET_CPU variable controls which processor should be targeted for
+  # generated code.
+    case $TARGET_ARCH in
+      aarch64)
+        TARGET_CPU="cortex-a53"
+        TARGET_CPU_FLAGS="+crc+fp+simd"
+        ;;
+      arm)
+        TARGET_KERNEL_ARCH="arm64"
+        TARGET_FLOAT="hard"
+        TARGET_CPU="cortex-a53"
+        TARGET_CPU_FLAGS="+crc"
+        TARGET_FPU="neon-fp-armv8"
+        ;;
+    esac
+
+  # Default DTB for S905L 1G boxes (mainline GXLX S905L P271)
+    DTB="meson-gxlx-s905l-p271.dtb"
+
+  # OpenGL-ES implementation to use
+    OPENGLES="mesa"
+
+  # Graphic drivers to use (Lima for Mali-450 on S905L)
+    GRAPHIC_DRIVERS="lima"
+
+  # KODI Player implementation to use
+    KODIPLAYER_DRIVER="$OPENGLES"
+
+  # Set the addon project
+    ADDON_PROJECT="ARMv8"
