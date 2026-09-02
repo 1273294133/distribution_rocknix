@@ -63,7 +63,9 @@ mkimage_dtb(){
 
 case "${UBOOT_SYSTEM}" in
   box|"")
-    DTB="@@DTB_NAME@@"
+    if [ -z "${DTB}" ]; then
+      DTB="@@DTB_NAME@@"
+    fi
     mkimage_uEnv
     mkimage_autoscripts
     mkimage_bootini
@@ -88,3 +90,4 @@ case "${UBOOT_SYSTEM}" in
     mkimage_dtb
     ;;
 esac
+
