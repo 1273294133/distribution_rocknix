@@ -1,0 +1,28 @@
+--- a/tools/mesh/mesh-db.c
++++ b/tools/mesh/mesh-db.c
+@@ -804,6 +804,6 @@ static json_object *get_element(uint16_t unicast, uint16_t ele_addr)
+ 
+ 	jnode = get_node_by_unicast(cfg->jcfg, unicast);
+ 	if (!jnode)
+-		return false;
++		return NULL;
+ 
+ 	if (!json_object_object_get_ex(jnode, "elements", &jarray))
+@@ -840,7 +840,7 @@ static json_object *get_model(uint16_t unicast, uint16_t ele_addr,
+ 	int i, sz;
+ 
+ 	jelement = get_element(unicast, ele_addr);
+ 	if (!jelement)
+-		return false;
++		return NULL;
+ 
+ 	if (!json_object_object_get_ex(jelement, "models", &jarray))
+@@ -2522,7 +2522,7 @@ void *mesh_db_prepare_export(void)
+ {
+ 	json_object *export = NULL, *jarray;
+ 
+ 	if (!cfg || !cfg->jcfg)
+-		return false;
++		return NULL;
+ 
+ 	if (json_object_deep_copy(cfg->jcfg, &export, NULL) != 0)
