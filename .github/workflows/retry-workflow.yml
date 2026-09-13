@@ -14,5 +14,6 @@ jobs:
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh run watch ${{ inputs.run_id }} > /dev/null 2>&1
+          # wait for the run to finish, but never fail this step on a failed run
+          gh run watch ${{ inputs.run_id }} > /dev/null 2>&1 || true
           gh run rerun ${{ inputs.run_id }} --failed
